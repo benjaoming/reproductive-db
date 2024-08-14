@@ -1,0 +1,61 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "reprodb"
+dynamic = ["version"]
+description = ''
+readme = "README.md"
+requires-python = ">=3.8"
+license = "GPLv3"
+keywords = []
+authors = [
+  { name = "benjaoming", email = "benjamin@overtag.dk" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = []
+
+[project.urls]
+Documentation = "https://github.com/benjaoming/reprodb#readme"
+Issues = "https://github.com/benjaoming/reprodb/issues"
+Source = "https://github.com/benjaoming/reprodb"
+
+[tool.hatch.version]
+path = "src/reprodb/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/reprodb tests}"
+
+[tool.coverage.run]
+source_pkgs = ["reprodb", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/reprodb/__about__.py",
+]
+
+[tool.coverage.paths]
+reprodb = ["src/reprodb", "*/reprodb/src/reprodb"]
+tests = ["tests", "*/reprodb/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
